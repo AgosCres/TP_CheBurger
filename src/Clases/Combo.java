@@ -18,6 +18,28 @@ public class Combo {
         this.extra = extra;
     }
 
+
+    /*
+        //Combo 1
+        Hamburguesa patria
+        IDcombo: 001
+        Detalle: PAN + CARNE + CRIOLLA + PROVOLETA
+        Precio: 14500
+
+       Combo 2
+        Hamburguesa clasica
+        IDcombo: 002
+        Detalle: PAN + CARNE + LECHUGA + TOMATE
+        Precio: 12000
+
+        Combo 3
+        Hamburguesa con queso
+        IDcombo: 003
+        Detalle: PAN + CARNE + DOBLE CHEDDAR
+        Precio: 13000
+     */
+
+
     //Busco en la lista general de extras el que tenga el ID igual al pasado como parámetro
     //Si lo encuentra y no está en el combo, lo agrego como a la lista extra el combo
     //Si no, muestro el mensaje de error.
