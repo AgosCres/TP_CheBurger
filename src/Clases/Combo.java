@@ -6,14 +6,12 @@ public class Combo {
     private int IDcombo;
     private float precio;
     private String nombre;
-    private String detalle;
 
     //Constructor
-    public Combo(int IDcombo, float precio, String nombre, String detlale) {
+    public Combo(int IDcombo, float precio, String nombre) {
         this.IDcombo = IDcombo;
         this.precio = precio;
         this.nombre = nombre;
-        this.detalle = detalle;
     }
 
     /*
