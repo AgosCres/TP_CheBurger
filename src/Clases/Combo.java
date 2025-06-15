@@ -1,7 +1,5 @@
 package Clases;
 
-import java.util.List;
-
 public class Combo {
     private int IDcombo;
     private float precio;
@@ -14,25 +12,36 @@ public class Combo {
         this.nombre = nombre;
     }
 
-    /*
-        //Combo 1
-        Hamburguesa patria
-        IDcombo: 001
-        Detalle: PAN + CARNE + CRIOLLA + PROVOLETA
-        Precio: 14500
+    //Getters y Setters
+    public int getIDcombo() {
+        return IDcombo;
+    }
+    public void setIdCombo(int idCombo) {
+        this.IDcombo = idCombo;
+    }
 
-       Combo 2
-        Hamburguesa clasica
-        IDcombo: 002
-        Detalle: PAN + CARNE + LECHUGA + TOMATE
-        Precio: 12000
+    public float getPrecio() {
+        return precio;
+    }
+    public void setPrecio(float precio) {
+        this.precio = precio;
+    }
 
-        Combo 3
-        Hamburguesa con queso
-        IDcombo: 003
-        Detalle: PAN + CARNE + DOBLE CHEDDAR
-        Precio: 13000
-     */
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
+    //impresión
+    @Override
+    public String toString() {
+        return "Combo{" +
+                "id=" + IDcombo +
+                ", nombre='" + nombre + '\'' +
+                ", precio=" + precio +
+                '}';
+    }
 }
 

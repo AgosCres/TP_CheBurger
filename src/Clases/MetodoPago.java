@@ -1,6 +1,6 @@
 package Clases;
 
-public enum MetodoDePago {
+public enum MetodoPago {
     EFECTIVO,
     TRANSFERENCIA,
     TARJETA

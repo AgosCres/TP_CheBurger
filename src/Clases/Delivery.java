@@ -1,18 +1,32 @@
 package Clases;
 
+//Guarda la referencia al Pedido que se entregó y el método de pago usado
+
 public class Delivery {
-    private int ID_Rider;
-    private String nombre;
-    private float costoEnvio;
-    private int horaLlegada;
-    private int horaSalida;
+    private Pedido pedido;
+    private MetodoPago metodo;
 
     //Constructor
-    public Delivery(int ID_Rider, String nombre, float costoEnvio, int horaLlegada, int horaSalida) {
-        this.ID_Rider = ID_Rider;
-        this.nombre = nombre;
-        this.costoEnvio = costoEnvio;
-        this.horaLlegada = horaLlegada;
-        this.horaSalida = horaSalida;
+    public Delivery(Pedido pedido, MetodoPago metodo) {
+        this.pedido = pedido;
+        this.metodo = metodo;
+    }
+
+    //Getters y Setters
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public MetodoPago getMetodo() {
+        return metodo;
+    }
+
+    //impresion
+    @Override
+    public String toString() {
+        return "Delivery{ pedido#" + pedido.getId() +
+                ", cliente=" + pedido.getCliente().getNombre() +
+                ", pago=" + metodo + " }";
     }
 }
+
