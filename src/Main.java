@@ -1,5 +1,6 @@
 import Clases.*;
 import tdaLista.Lista;
+
 import java.util.*;
 
 
@@ -11,9 +12,10 @@ public class Main {
         // Definición de combos disponibles
         List<Combo> menuCombos = Arrays.asList(
                 new ComboClasica(1, 1500, "Clasica", "Carne, queso"),
-                new ComboQueso(  2, 1700, "Queso",   "Carne, doble queso"),
-                new ComboPatria(3, 2000, "Patria",  "Carne, queso, panceta")
+                new ComboQueso(2, 1700, "Queso", "Carne, doble queso"),
+                new ComboPatria(3, 2000, "Patria", "Carne, queso, panceta")
         );
+        MetodoDePago[] metodos = MetodoDePago.values(); //array metodo de pago para el menú
 
         while (true) {
             System.out.println("\n--- CheBurger Menu ---");
@@ -27,7 +29,7 @@ public class Main {
             sc.nextLine();
             switch (opcion) {
                 case 1:
-                
+
                     // Mostrar menú de combos y permitir agregar varios
                     List<Combo> combosSeleccionados = new ArrayList<>();
                     String seguir;
@@ -68,16 +70,34 @@ public class Main {
                     System.out.print("ID de pedido: ");
                     int pedidoId = sc.nextInt();
                     sc.nextLine();
+
                     System.out.print("Nombre cliente: ");
                     String nombre = sc.nextLine();
 
-                    Cliente cliente = new Cliente(pedidoId, nombre, MetodoDePago.EFECTIVO);
+                    System.out.println("\n-- Métodos de Pago --");
+                    for (int i = 0; i < metodos.length; i++) {
+                        System.out.printf("%d. %s%n", i + 1, metodos[i]);
+
+                    }
+                    System.out.print("Elige método de pago: ");
+                    int mp = sc.nextInt();
+                    sc.nextLine();
+                    MetodoDePago elegido;
+                    if (mp >= 1 && mp <= metodos.length) {
+                        elegido = metodos[mp - 1];
+
+                    } else {
+                        System.out.println("Método inválido, se usará EFECTIVO por defecto.");
+                        elegido = MetodoDePago.EFECTIVO;
+                    }
+
+                    Cliente cliente = new Cliente(pedidoId, nombre, elegido);
                     Pedido nuevo = new Pedido(pedidoId, cliente, combosSeleccionados, null);
                     sistema.altaPedido(nuevo);
                     System.out.println("✅ Pedido agregado con " + combosSeleccionados.size() + " combo(s).");
                     break;
 
-                    // se agrega funcion de agregar mas de un combo en un mismo pedido
+                // se agrega funcion de agregar mas de un combo en un mismo pedido
 
                 case 2:
                     Lista<Pedido> lista = sistema.listarPedidos();
@@ -98,14 +118,21 @@ public class Main {
                     System.out.print("ID de pedido a actualizar: ");
                     int actualizarId = sc.nextInt();
                     sc.nextLine();
-                    System.out.print("Nuevo estado (PENDIENTE, EN_PREPARACION, LISTO, EN_CAMINO, ENTREGADO, CANCELADO): ");
-                    String estadoStr = sc.nextLine();
-                    try {
-                        EstadoPedido nuevoEstado = EstadoPedido.valueOf(estadoStr);
-                        boolean ok = sistema.actualizarEstado(actualizarId, nuevoEstado);
+
+                    // --- Nuevo bloque: menú de estados ---
+                    EstadoPedido[] estados = EstadoPedido.values();
+                    System.out.println("\n-- Seleccione nuevo estado --");
+                    for (int i = 0; i < estados.length; i++) {
+                        System.out.printf("%d. %s%n", i + 1, estados[i]);
+                    }
+                    System.out.print("Opción: ");
+                    int es = sc.nextInt();
+                    sc.nextLine();
+                    if (es >= 1 && es <= estados.length) {
+                        boolean ok = sistema.actualizarEstado(actualizarId, estados[es - 1]);
                         System.out.println(ok ? "Estado actualizado." : "Pedido no encontrado.");
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Estado inválido.");
+                    } else {
+                        System.out.println("Opción inválida.");
                     }
                     break;
 
