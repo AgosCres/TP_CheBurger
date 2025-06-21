@@ -30,5 +30,10 @@ public class Pedido {
     public void setEstado(EstadoPedido nuevoEstado) {
         this.estado = nuevoEstado;
     }
+
+    public void agregarCombo(Combo combo) {
+        combos.add(combo);
+    }
+
 }
 

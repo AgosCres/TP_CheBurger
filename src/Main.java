@@ -26,25 +26,40 @@ public class Main {
             sc.nextLine();
             switch (opcion) {
                 case 1:
-                    // Mostrar menú de combos
-                    System.out.println("\n-- Menú de Combos --");
-                    for (Combo c : menuCombos) {
-                        System.out.printf("%d. %s ($%.0f)%n",
-                                c.getIDcombo(), c.getNombre(), c.getPrecio());
-                    }
-                    System.out.print("Elige ID de combo: ");
-                    int comboId = sc.nextInt();
-                    sc.nextLine();
-
-                    Combo seleccionado = null;
-                    for (Combo c : menuCombos) {
-                        if (c.getIDcombo() == comboId) {
-                            seleccionado = c;
-                            break;
+                    // Mostrar menú de combos y permitir agregar varios
+                    List<Combo> combosSeleccionados = new ArrayList<>();
+                    String seguir;
+                    do {
+                        System.out.println("\n-- Menú de Combos --");
+                        for (Combo c : menuCombos) {
+                            System.out.printf("%d. %s ($%.0f)%n",
+                                    c.getIDcombo(), c.getNombre(), c.getPrecio());
                         }
-                    }
-                    if (seleccionado == null) {
-                        System.out.println("Combo inválido.");
+                        System.out.print("Elige ID de combo: ");
+                        int comboId = sc.nextInt();
+                        sc.nextLine(); // limpiar
+
+                        Combo seleccionado = null;
+                        for (Combo c : menuCombos) {
+                            if (c.getIDcombo() == comboId) {
+                                seleccionado = c;
+                                break;
+                            }
+                        }
+
+                        if (seleccionado != null) {
+                            combosSeleccionados.add(seleccionado);
+                            System.out.println("Combo agregado al pedido.");
+                        } else {
+                            System.out.println("Combo inválido.");
+                        }
+
+                        System.out.print("¿Deseás agregar otro combo al mismo pedido? (s/n): ");
+                        seguir = sc.nextLine();
+                    } while (seguir.equalsIgnoreCase("s"));
+
+                    if (combosSeleccionados.isEmpty()) {
+                        System.out.println("No se agregó ningún combo. Pedido cancelado.");
                         break;
                     }
 
@@ -55,13 +70,11 @@ public class Main {
                     String nombre = sc.nextLine();
 
                     Cliente cliente = new Cliente(pedidoId, nombre, MetodoDePago.EFECTIVO);
-                    Pedido nuevo = new Pedido(pedidoId,
-                            cliente,
-                            Arrays.asList(seleccionado),
-                            null);
+                    Pedido nuevo = new Pedido(pedidoId, cliente, combosSeleccionados, null);
                     sistema.altaPedido(nuevo);
-                    System.out.println("Pedido agregado.");
+                    System.out.println("✅ Pedido agregado con " + combosSeleccionados.size() + " combo(s).");
                     break;
+
 
                 case 2:
                     Lista<Pedido> lista = sistema.listarPedidos();
