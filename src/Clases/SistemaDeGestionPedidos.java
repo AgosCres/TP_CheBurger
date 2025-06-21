@@ -67,4 +67,15 @@ public class SistemaDeGestionPedidos {
     public String verCola() {
         return colaPedidos.verCola();
     }
+
+    /**
+     * Agrega un nuevo Cliente al sistema.
+
+    public void altaCliente(Cliente cliente) {
+        int id = pedido.getIDPedido();
+        mapaPedidos.put(id, pedido);
+        colaPedidos.encolar(id);
+        listaTodosPedidos.agregar(pedido);
+    }
+     */
 }

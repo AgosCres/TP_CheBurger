@@ -11,4 +11,10 @@ public class Cliente {
         this.nombre = nombre;
         this.metodoDePago = metodoDePago;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+
 }
