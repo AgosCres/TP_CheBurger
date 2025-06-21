@@ -22,13 +22,13 @@ public class Combo {
 }
 
     /*
-        //Combo 1
+        Combo 1
         Hamburguesa patria
         IDcombo: 001
         Detalle: PAN + CARNE + CRIOLLA + PROVOLETA
         Precio: 14500
 
-       Combo 2
+        Combo 2
         Hamburguesa clasica
         IDcombo: 002
         Detalle: PAN + CARNE + LECHUGA + TOMATE
@@ -41,5 +41,6 @@ public class Combo {
         Precio: 13000
      */
 
-
+// 1 llega -> cola -> opera -> sale de la cola (agregar combo a un pedido)
+// 1 nuevo combo = nueva clase = nueva herencia (agregar combo nuevo al menu)
 
