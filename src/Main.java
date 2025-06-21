@@ -34,8 +34,8 @@ public class Main {
                     do {
                         System.out.println("\n-- Menú de Combos --");
                         for (Combo c : menuCombos) {
-                            System.out.printf("%d. %s ($%.0f)%n",
-                                    c.getIDcombo(), c.getNombre(), c.getPrecio());
+                            System.out.printf("%d. %s ($%.0f) - Detalle: %s%n",
+                                    c.getIDcombo(), c.getNombre(), c.getPrecio(), c.getDetalle());
                         }
                         System.out.print("Elige ID de combo: ");
                         int comboId = sc.nextInt();
