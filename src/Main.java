@@ -2,6 +2,7 @@ import Clases.*;
 import tdaLista.Lista;
 import java.util.*;
 
+
 public class Main {
     public static void main(String[] args) {
         SistemaDeGestionPedidos sistema = new SistemaDeGestionPedidos(100);
@@ -17,7 +18,7 @@ public class Main {
         while (true) {
             System.out.println("\n--- CheBurger Menu ---");
             System.out.println("1. Agregar pedido");
-            System.out.println("2. Ver estado de pedidos");
+            System.out.println("2. Ver pedido");
             System.out.println("3. Actualizar estado de pedido");
             System.out.println("4. Salir");
             System.out.print("Selecciona una opción: ");
@@ -29,8 +30,8 @@ public class Main {
                     // Mostrar menú de combos
                     System.out.println("\n-- Menú de Combos --");
                     for (Combo c : menuCombos) {
-                        System.out.printf("%d. %s ($%.0f)%n",
-                                c.getIDcombo(), c.getNombre(), c.getPrecio());
+                        System.out.printf("%d. %s ($%.0f) - Detalle: %s%n",
+                                c.getIDcombo(), c.getNombre(), c.getPrecio(), c.getDetalle());
                     }
                     System.out.print("Elige ID de combo: ");
                     int comboId = sc.nextInt();
@@ -66,12 +67,12 @@ public class Main {
                 case 2:
                     Lista<Pedido> lista = sistema.listarPedidos();
                     if (lista.estaVacia()) {
-                        System.out.println("No hay pedidos.");
+                        System.out.println("No hay pedidos realizados.");
                     } else {
                         System.out.println("\n-- Pedidos --");
                         for (int i = 0; i < lista.size(); i++) {
                             Pedido p = lista.get(i);
-                            System.out.printf("ID: %d, Estado: %s%n",
+                            System.out.printf("ID: %d , Estado: %s%n",
                                     p.getIDPedido(),
                                     p.getEstado());
                         }
