@@ -68,7 +68,7 @@ public class SistemaDeGestionPedidos {
         return colaPedidos.verCola();
     }
 
-    /**
+    /*
      * Agrega un nuevo Cliente al sistema.
 
     public void altaCliente(Cliente cliente) {

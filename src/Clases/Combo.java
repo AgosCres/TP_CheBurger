@@ -1,5 +1,6 @@
 package Clases;
 
+//atributos
 public class Combo {
     private int    IDcombo;
     private float  precio;
