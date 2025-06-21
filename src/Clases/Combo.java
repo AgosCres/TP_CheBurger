@@ -1,18 +1,25 @@
 package Clases;
 
-import java.util.List;
-
 public class Combo {
-    private int IDcombo;
-    private float precio;
+    private int    IDcombo;
+    private float  precio;
     private String nombre;
+    private String detalle;     // <- nuevo
 
-    //Constructor
-    public Combo(int IDcombo, float precio, String nombre) {
+    // Constructor de 4 parámetros
+    public Combo(int IDcombo, float precio, String nombre, String detalle) {
         this.IDcombo = IDcombo;
-        this.precio = precio;
-        this.nombre = nombre;
+        this.precio   = precio;
+        this.nombre   = nombre;
+        this.detalle  = detalle;
     }
+
+    // Getters que faltaban
+    public int    getIDcombo() { return IDcombo; }
+    public float  getPrecio()  { return precio;   }
+    public String getNombre()  { return nombre;   }
+    public String getDetalle() { return detalle;  }
+}
 
     /*
         //Combo 1
@@ -34,5 +41,5 @@ public class Combo {
         Precio: 13000
      */
 
-}
+
 

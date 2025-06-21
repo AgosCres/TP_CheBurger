@@ -1,85 +1,73 @@
 package tdaCola;
 
-public class ColaOrdenPedidos implements Cola{
-    int [] datos;
+public class ColaOrdenPedidos<E> implements Cola<E> {
+    private Object[] datos;
+    private int frente;
+    private int fin;
+    private int cantidad;
+    private int capacidad;
 
-    private int frente, fin, cantidad, capacidad;
-
-    public ColaOrdenPedidos (int capacidad){
+    public ColaOrdenPedidos(int capacidad) {
         this.capacidad = capacidad;
-        datos = new int [capacidad];
-        frente = 0;
-        fin = -1;
+        datos = new Object[capacidad];
+        crear();
     }
 
     @Override
     public void crear() {
-
+        frente = 0;
+        fin = -1;
+        cantidad = 0;
     }
 
     @Override
-    public void encolar(int elemento) {
-        if(estaLlena()) {
-            System.out.println("Cola completa, no se aceptan más pedidos..");
-        }else  {
-            fin = (fin+1);
-            datos[fin] = elemento;
-            cantidad++;
-            System.out.println("Se agregó el pedido "+datos[1]+" en el orden:" + fin);
-        }
+    public void encolar(E elem) {
+        if (estaLlena()) throw new IllegalStateException("Cola llena");
+        fin = (fin + 1) % capacidad;
+        datos[fin] = elem;
+        cantidad++;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public void desencolar() {
-        if(estaVacia()){
-            System.out.println("No hay pedidos pendientes");
-        }else{
-            int auxiliar = datos [frente];
-            frente = (frente+1);
-            cantidad --;
-            System.out.println("Se entregó el pedido " + auxiliar);
-        }
-
+    public E desencolar() {
+        if (estaVacia()) throw new IllegalStateException("Cola vacía");
+        E elem = (E) datos[frente];
+        datos[frente] = null;
+        frente = (frente + 1) % capacidad;
+        cantidad--;
+        return elem;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public int frente() { //muestro el primer pedido a ser atendido
-        if (cantidad == 0) {
-            System.out.println("No hay pedidos pendientes");
-            return 1;
-        } else {
-            int auxiliar = datos[frente];
-            System.out.println("El primer pedido a preprar es -->" + auxiliar);
-            return auxiliar;
-        }
+    public E frente() {
+        return estaVacia() ? null : (E) datos[frente];
     }
 
     @Override
     public boolean estaVacia() {
-        if(cantidad == 0)
-            return true;
-        else
-            return false;
+        return cantidad == 0;
     }
 
     @Override
     public boolean estaLlena() {
-        if(cantidad==capacidad)
-            return  true;
-        else
-          return false;
+        return cantidad == capacidad;
     }
+
     @Override
-    public void verCola() {
-        if(estaVacia()){
-            System.out.println("Cola sin pedidos pendientes");
-            return;
+    public String verCola() {
+        if (estaVacia()) return "Cola vacía";
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < cantidad; i++) {
+            int idx = (frente + i) % capacidad;
+            sb.append(datos[idx]);
+            if (i < cantidad - 1) sb.append(", ");
         }
-        System.out.println("\nListado de pedidos: ");
-        for (int  i=0; i<cantidad; i++){
-            int indice  = (frente+i) % capacidad; //calculo el índice, calculando el resto para saber la posición de la cola
-            System.out.print(datos[indice]+ " " + "|");
-        }
-        System.out.println();
+        return sb.toString();
+    }
+
+    public int size() {
+        return cantidad;
     }
 }

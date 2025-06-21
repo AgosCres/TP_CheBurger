@@ -9,23 +9,26 @@ public class Pedido {
     private Delivery delivery;
     private EstadoPedido estado;
 
-    //Constructor
-    public Pedido(int IDPedido, Cliente cliente, List<Combo> combos, Delivery delivery, EstadoPedido estado) {
+    // 1) Constructor de 4 parámetros, arranca siempre PENDIENTE
+    public Pedido(int IDPedido, Cliente cliente, List<Combo> combos, Delivery delivery) {
         this.IDPedido = IDPedido;
-        this.cliente = cliente;
-        this.combos = combos;
-        this.delivery = delivery;
-        this.estado = EstadoPedido.PENDIENTE; //Estado incial de todos los pedidos
+        this.cliente   = cliente;
+        this.combos    = combos;
+        this.delivery  = delivery;
+        this.estado    = EstadoPedido.PENDIENTE;
     }
 
-    //Con este getter puedo acceder al estado ACTUAL del pedido desde afuera de la clase
-    public EstadoPedido getEstado(){
+    // 2) Getter para IDPedido
+    public int getIDPedido() {
+        return IDPedido;
+    }
+
+    // Ya existían:
+    public EstadoPedido getEstado() {
         return estado;
     }
-
-    //Con este setter podemos MODIFICAR el estado del pedido
-    public void setEstado (EstadoPedido nuevoEstado){
+    public void setEstado(EstadoPedido nuevoEstado) {
         this.estado = nuevoEstado;
     }
-
 }
+
