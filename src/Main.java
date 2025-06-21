@@ -75,6 +75,7 @@ public class Main {
                     System.out.println("✅ Pedido agregado con " + combosSeleccionados.size() + " combo(s).");
                     break;
 
+                    // se agrega funcion de agregar mas de un combo en un mismo pedido
 
                 case 2:
                     Lista<Pedido> lista = sistema.listarPedidos();
